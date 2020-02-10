@@ -21,35 +21,37 @@ namespace Oficina.Controllers
 
         // GET: api/Pessoa
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Pessoa> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _pessoaService.ListarPessoas();
         }
 
         // GET: api/Pessoa/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet("{pessoaId}", Name = "Get")]
+        public Pessoa Get(int pessoaId)
         {
-            return "value";
+            return _pessoaService.BuscarPessoa(pessoaId);
         }
 
         // POST: api/Pessoa
         [HttpPost]
-        public void Post([FromBody] Pessoa pessoa)
+        public JsonResult Post([FromBody] Pessoa pessoa)
         {
-            _pessoaService.AdicionarPessoa(pessoa);
+            return new JsonResult(_pessoaService.AdicionarPessoa(pessoa));
         }
 
         // PUT: api/Pessoa/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Pessoa pessoa)
+        [HttpPut("{pessoaId}")]
+        public JsonResult Put(int pessoaId, [FromBody] Pessoa pessoa)
         {
+            return new JsonResult(_pessoaService.AlterarPessoa(pessoaId, pessoa));
         }
 
         // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{pessoaId}")]
+        public JsonResult Delete(int pessoaId)
         {
+            return new JsonResult(_pessoaService.ExcluirPessoa(pessoaId));
         }
     }
 }

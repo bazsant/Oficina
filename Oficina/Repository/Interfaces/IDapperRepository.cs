@@ -10,5 +10,6 @@ namespace Oficina.Repository.Interfaces
     {
         int Execute(string sql, object param);
         IEnumerable<T> Query<T>(string sql);
+        IEnumerable<T> Query<T>(string sql, object param);
     }
 }

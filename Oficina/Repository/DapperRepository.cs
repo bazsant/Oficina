@@ -37,5 +37,14 @@ namespace Oficina.Repository
             }
         }
 
+        public IEnumerable<T> Query<T>(string sql, object param)
+        {
+            using (SqlConnection conexao = new SqlConnection(
+               _configuration.GetConnectionString("SqlServerConnection")))
+            {
+                return conexao.Query<T>(sql, param);
+            }
+        }
+
     }
 }
